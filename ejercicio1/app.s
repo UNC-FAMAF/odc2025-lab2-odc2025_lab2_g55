@@ -1,4 +1,4 @@
-	.equ SCREEN_WIDTH, 		640
+	.equ SCREEN_WIDTH, 		641
 	.equ SCREEN_HEIGH, 		480
 	.equ BITS_PER_PIXEL,  	32
 
@@ -6,15 +6,18 @@
 	.equ GPIO_GPFSEL0,   0x00
 	.equ GPIO_GPLEV0,    0x34
 
+    .equ RED,   0xff0000
+
 	.globl main
 
+    .extern circle_draw
 main:
 	// x0 contiene la direccion base del framebuffer
  	mov x20, x0	// Guarda la dirección base del framebuffer en x20
 	//---------------- CODE HERE ------------------------------------
 
-	movz x10, 0xC7, lsl 16
-	movk x10, 0x1585, lsl 00
+	movz x10, 0x28, lsl 16
+	movk x10, 0x2828, lsl 00
 
 	mov x2, SCREEN_HEIGH         // Y Size
 loop1:
@@ -45,6 +48,15 @@ loop0:
 	// w11 será 1 si había un 1 en la posición 2 de w10, si no será 0
 	// efectivamente, su valor representará si GPIO 2 está activo
 	lsr w11, w11, 1
+
+    // Probando circle_draw
+    mov x0, #320
+    mov x1, #240
+    mov x2, #120
+    mov x3, #0
+    mov x4, 0xFF0000
+    mov x5, #4
+    bl circle_draw
 
 	//---------------------------------------------------------------
 	// Infinite Loop
