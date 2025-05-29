@@ -26,11 +26,6 @@ circle_draw:
     neg x9, x2          // y = -r
     mov x10, x9         // p = -r
 
-    sub x6, x5, #1      // half_low = thickness - 1
-    lsr x6, x6, #1      // half_low = (thickness - 1) div 2
-
-    mov x7, x5, lsr #1  // half_high = thickness div 2
-
 loop_circ:
     adds xzr, x8, x9      // Seteo flags para checkear la condición del loop (x < -y)
     b.ge done
@@ -52,6 +47,11 @@ else:
     add x10, x10, #1            // p += 2*x + 1
 
 fi: // fin del condicional
+
+    sub x6, x5, #1      // half_low = thickness - 1
+    lsr x6, x6, #1      // half_low = (thickness - 1) div 2
+
+    mov x7, x5, lsr #1  // half_high = thickness div 2
 
     neg x14, x6     // dx = -half_low
 loop1:

@@ -54,7 +54,7 @@ loop0:
     mov x1, #240
     mov x2, #120
     mov x3, #0
-    mov x4, 0xFF0000
+    mov x4, 0x000000
     mov x5, #4
     bl circle_draw
 
