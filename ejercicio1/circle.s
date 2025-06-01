@@ -109,7 +109,55 @@ loop2:
     b next_loop
 
 fill:
-    //TODO
+    neg x15,x8 // dy = -x
+
+    // loop 1
+    //for (int dy = -x; dy <= x; dy++) {
+    //      putPixel(cx + y, cy + dy);
+    //      putPixel(cx - y, cy + dy);
+    //      }
+
+fill_loop1:
+
+    //putPixel (cx + y, cy + dy)
+    add x11, x0, x9     //  cx + y
+    add x12, x1, x15    //  cy + dy
+    bl put_pixel
+
+    //putPixel (cx - y, cy + dy)
+    sub x11, x0, x9     //  cx - y
+    add x12, x1, x15    //  cy + dy
+    bl put_pixel
+
+    add x15, x15, #1    // dy++
+    cmp x15,x8 // (dy <= x)
+    b.le fill_loop1
+
+    mov x15, x9         // dy = y
+    neg x16, x9         // x16 será el límite superior
+
+    // loop 2
+    //for (int dy = y; dy <= -y; dy++) {
+    //      putPixel(cx + x, cy + dy);
+    //      putPixel(cx - x, cy + dy);
+    //      }
+
+
+fill_loop2:
+
+    //putPixel (cx + x, cy + dy)
+    add x11, x0, x8     //  x_coord = cx + x
+    add x12, x1, x15    //  y_coord = cy + dy
+    bl put_pixel
+
+    //putPixel (cx - x, cy + dy)
+    sub x11, x0, x8     //  x_coord = cx - x
+    add x12, x1, x15    //  y_coord = cy + dy
+    bl put_pixel
+
+    add x15, x15, #1    // dy++
+    cmp x15, x16        // Compara dy con el límite superior
+    b.le fill_loop2     // Continúa si dy <= -y
 
 next_loop:
     add x8, x8, #1  // x += 1
