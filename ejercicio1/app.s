@@ -6,12 +6,11 @@
 	.equ GPIO_GPFSEL0,   0x00
 	.equ GPIO_GPLEV0,    0x34
 
-    .equ RED,   0xff0000
-
 	.globl main
 
+    .extern draw_sharingan
     .extern circle_draw
-		.extern rectangle_draw
+	.extern rectangle_draw
 main:
 	// x0 contiene la direccion base del framebuffer
  	mov x20, x0	// Guarda la dirección base del framebuffer en x20
@@ -50,153 +49,8 @@ loop0:
 	// efectivamente, su valor representará si GPIO 2 está activo
 	lsr w11, w11, 1
 
-    // Dibujando el ojo
-    mov x0, #320
-    mov x1, #240
-    mov x2, #120
-    mov x3, #10
-    mov x4, 0x000000
-    bl circle_draw
+    bl draw_sharingan
 
-		mov x0, #320
-    mov x1, #240
-    mov x2, #119
-    mov x3, #0
-    mov x4, 0xff0000
-		bl circle_draw
-
-	  mov x0, #320
-    mov x1, #240
-    mov x2, #80
-    mov x3, #5
-    mov x4, 0x940000
-		bl circle_draw
-
-		mov x0, #320
-    mov x1, #240
-    mov x2, #40
-    mov x3, #0
-    mov x4, 0x940000
-		bl circle_draw
-
-		mov x0, #320
-    mov x1, #240
-    mov x2, #25
-    mov x3, #0
-    mov x4, 0x000000
-		bl circle_draw
-
-		//primer tomoe (arriba a la derecha)
-		mov x0, #350
-    mov x1, #170
-    mov x2, #20
-    mov x3, #0
-    mov x4, 0x000000
-		bl circle_draw
-
-		mov x0, #342
-    mov x1, #150
-    mov x2, #20
-    mov x3, #8
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		mov x0, #346
-    mov x1, #145
-    mov x2, #23
-    mov x3, #8
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		mov x0, #352
-    mov x1, #141
-    mov x2, #23
-    mov x3, #8
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		mov x0, #361
-    mov x1, #139
-    mov x2, #10
-    mov x3, #8
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		//segundo tomoe (izquierda)
-		mov x0, #240
-    mov x1, #240
-    mov x2, #20
-    mov x3, #0
-    mov x4, 0x000000
-		bl circle_draw
-
-		mov x0, #220
-    mov x1, #233
-    mov x2, #6
-    mov x3, #20
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		mov x0, #213
-    mov x1, #240
-    mov x2, #20
-    mov x3, #12
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		mov x0, #210
-    mov x1, #237
-    mov x2, #4
-    mov x3, #12
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		mov x0, #208
-    mov x1, #233
-    mov x2, #4
-    mov x3, #12
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		//tercer tomoe (abajo a la derecha)
-		mov x0, #350
-    mov x1, #310
-    mov x2, #20
-    mov x3, #0
-    mov x4, 0x000000
-		bl circle_draw
-
-		mov x0, #370
-    mov x1, #303
-    mov x2, #3
-    mov x3, #24
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw	
-
-		mov x0, #365
-    mov x1, #315
-    mov x2, #5
-    mov x3, #20
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw
-
-		mov x0, #360
-    mov x1, #320
-    mov x2, #5
-    mov x3, #23
-    ldr x4, 0x000000
-    mov x5, #0
-    bl rectangle_draw							
 	//---------------------------------------------------------------
 	// Infinite Loop
 

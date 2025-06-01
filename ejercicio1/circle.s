@@ -130,7 +130,7 @@ fill_loop1:
     bl put_pixel
 
     add x15, x15, #1    // dy++
-    cmp x15,x8 // (dy <= x)
+    cmp x15, x8 // (dy <= x)
     b.le fill_loop1
 
     mov x15, x9         // dy = y

@@ -7,7 +7,7 @@
 // X2: width, ancho del rectángulo
 // X3: height, alto del rectángulo
 // X4: clr, color del rectángulo
-// X5: fill, si es 0 el rectángulo se dibuja relleno, si es > 0 se dibuja solo el borde y del grosor indicado
+// X5: fill, si es <= 0 el rectángulo se dibuja relleno, si es > 0 se dibuja solo el borde y del grosor indicado
 
 // Variables de rectangle_draw
 // x6 = current_y (contador del bucle exterior)
@@ -25,7 +25,7 @@ rectangle_draw:
     add x9, x0, x2              // x_end = rect_x + width
 
     cmp x5, #0
-    b.gt draw_border            // Si fill no es 0, dibuja solo el borde
+    b.gt draw_border            // Si fill > 0, dibuja solo el borde
 
 draw_filled:
     mov x6, x1                  // current_y = rect_y (inicio del bucle exterior)
