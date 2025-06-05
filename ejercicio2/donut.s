@@ -15,60 +15,59 @@
 .equ SCREEN_HEIGHT, 480
 .equ SCREEN_SIZE,   SCREEN_WIDTH * SCREEN_HEIGHT
 
-.equ D_SIZE,        100
-.equ H_SIZE,        D_SIZE/2
+.equ D_SIZE,        128
 .equ D_AREA,        D_SIZE * D_SIZE
 
-.equ D_XOFFSET,     SCREEN_WIDTH/2 - H_SIZE
-.equ D_YOFFSET,     SCREEN_HEIGHT/2 - H_SIZE + 100
+.equ D_XOFFSET,     SCREEN_WIDTH/2 - D_SIZE/2
+.equ D_YOFFSET,     SCREEN_HEIGHT/2 - D_SIZE/2 + 110
 .equ SCALE,         57
 
 .equ PHI,           180
-.equ H_PHI,         PHI/2
 .equ THETA,         655     // 655 causa un poquito de overdraw pero quien soy yo para quejarme
 
 .equ HALT_TIME,     0
 
 .section .rodata
-.align 2
+.balign 32
 brown_gradient:
-    .word 0xFF1B0B07
-    .word 0xFF2C120A
-    .word 0xFF3E1B0D
-    .word 0xFF4F2611
-    .word 0xFF5F2E13
-    .word 0xFF703818
-    .word 0xFF81411C
-    .word 0xFF935022
-    .word 0xFFA66128
-    .word 0xFFB76F30
-    .word 0xFFC67D39
-    .word 0xFFD48B42
+    .word 0x001B0B07
+    .word 0x002C120A
+    .word 0x003E1B0D
+    .word 0x004F2611
+    .word 0x005F2E13
+    .word 0x00703818
+    .word 0x0081411C
+    .word 0x00935022
+    .word 0x00A66128
+    .word 0x00B76F30
+    .word 0x00C67D39
+    .word 0x00D48B42
 
-.align 2
+.balign 32
 pink_gradient:
-    .word 0xFF4B1E3A
-    .word 0xFF5A2A49
-    .word 0xFF693458
-    .word 0xFF783F67
-    .word 0xFF874A76
-    .word 0xFF965685
-    .word 0xFFA56294
-    .word 0xFFB36DA2
-    .word 0xFFC178B1
-    .word 0xFFCF84C0
-    .word 0xFFDD8FCE
-    .word 0xFFEB9BDD
+    .word 0x004B1E3A
+    .word 0x005A2A49
+    .word 0x00693458
+    .word 0x00783F67
+    .word 0x00874A76
+    .word 0x00965685
+    .word 0x00A56294
+    .word 0x00B36DA2
+    .word 0x00C178B1
+    .word 0x00CF84C0
+    .word 0x00DD8FCE
+    .word 0x00EB9BDD
 
 .section .bss
-.align 0
+.balign 16
 z:  .skip D_AREA
 
-.align 2
+.balign 16
 v_framebuffer: .skip SCREEN_SIZE * 4
 
 .section .text
 .extern halt
+.extern background
 .global donut
 donut:
     mov x18, x0
@@ -80,21 +79,8 @@ donut:
 
 inf_loop:
 
-// ESTE CÓDIGO HAY QUE REEMPLAZARLO CUANDO HAGAMOS LA RUTINA QUE DIBUJE EL FONDO
-    ldr x9, =v_framebuffer
-	movz x10, 0x64, lsl 16
-	movk x10, 0x95ED, lsl 00
-	mov x2, SCREEN_HEIGHT   // Y Size
-loop:
-	mov x1, SCREEN_WIDTH    // X Size
-loop0:
-	stur w10,[x9]   // Colorear el pixel N
-	add x9,x9,4	    // Siguiente pixel
-	sub x1,x1,1	    // Decrementar contador X
-	cbnz x1,loop0   // Si no terminó la fila, salto
-	sub x2,x2,1	    // Decrementar contador Y
-	cbnz x2,loop    // Si no es la última fila, salto
-// ESTE CÓDIGO HAY QUE REEMPLAZARLO CUANDO HAGAMOS LA RUTINA QUE DIBUJE EL FONDO
+    ldr x0, =v_framebuffer
+    bl background
 
     ldr x13, =v_framebuffer
 
@@ -105,11 +91,15 @@ loop0:
     mul x11, x11, x0        // K2 = 5120 * 1024
 
 // memset(z, 127, D_AREA)
-    mov x9, D_AREA  // x9 se usa como variable temporal en memset
-    mov w10, #127   // lo mismo!!
+    mov x9, #(D_AREA/16)    // 16384/16 = 1024
+    mov w10, #127           // lo mismo!!
+    dup v0.16b, w10         // se setea v0 a 127 cada 8bits
+    mov x0, x27             // x0 = &z-buffer
+// Se setea el z-buffer a 127 (Todos los pixeles están en la profundidad máxima)
 memset:
+    // Se usa un registro de vectores para setear de 16 bytes a la vez
+    st1 { v0.16b }, [x0], #16
     subs x9, x9, #1
-    strb w10, [x27, x9]
     bne memset
 
     mov x23, xzr    // sj = 0
@@ -153,13 +143,13 @@ loop_theta:
     msub x8, x21, x4, x8    // x8 = cB*x1 - sB*x4
     mul x8, x8, x9          // x8 = SCALE*(cB*x1 - sB*4) / x6
     sdiv x8, x8, x6         // x8 = (cB*x1 - sB*4) / x6
-    add x0, x8, H_SIZE      // x = H_SIZE + SCALE*(cB*x1 - sB*4) / x6
+    add x0, x8, (D_SIZE/2)  // x = (D_SIZE/2) + SCALE*(cB*x1 - sB*4) / x6
 
     mul x8, x22, x4         // x8 = cB*x4
     madd x8, x21, x1, x8    // x8 = cB*x4 + sB*x1
     mul x8, x8, x9          // x8 = SCALE*(cB*x4 + sB*x1) / x6
     sdiv x8, x8, x6         // x8 = (cB*x4 + sB*x1) / x6
-    add x1, x8, H_SIZE      // y = H_SIZE + SCALE*(cB*x4 + sB*x1) / x6
+    add x1, x8, (D_SIZE/2)  // y = (D_SIZE/2) + SCALE*(cB*x4 + sB*x1) / x6
 
     mneg x8, x19, x7        // x8 = -sA*x7
     add x8, x2, x8, asr #10 // x8 = (-sA*x7 >> 10) + x2
@@ -207,10 +197,10 @@ Npositive:
     mov x2, #11
 Nlt12:
 
-    // if(j <= H_PHI)
+    // if(j <= (PHI/2))
     lsl x4, x2, #2          // x4 = N*4
 
-    cmp x15, H_PHI
+    cmp x15, (PHI/2)
     b.le else
     ldr x3, =brown_gradient
     ldr w3, [x3, x4]        // w3 = brown_gradient[N]
@@ -282,22 +272,21 @@ fi:
     mov x22, x2
     mov x21, x3
 
-    mov x1, xzr
-    mov x2, SCREEN_WIDTH
-    mov x3, SCREEN_HEIGHT
-    mul x2, x2, x3
-    lsl x2, x2, #2
+    mov x1, #(SCREEN_SIZE/8)
+    mov x0, x18
+// Se pasan los pixeles del buffer de dibujado al framebuffer
 copy_buffers:
-    ldr w3, [x13, x1]
-    str w3, [x18, x1]
-    
-    add x1, x1, #4
-    cmp x1, x2
+    // Uso los registros de vectores de 128bits para copiar de 4 pixeles a la vez
+    // Se hace un unroll del loop para copiar 8 pixeles por ciclo
+    ld1 { v0.4s }, [x13], #16
+    st1 { v0.4s }, [x0], #16
+    ld1 { v1.4s }, [x13], #16
+    st1 { v1.4s }, [x0], #16
+    subs x1, x1, #1
     bne copy_buffers
 
-    mov x0, HALT_TIME
-    lsl x0, x0, #8
-    bl halt
+    //mov x0, HALT_TIME
+    //bl halt
 
 b inf_loop
 
