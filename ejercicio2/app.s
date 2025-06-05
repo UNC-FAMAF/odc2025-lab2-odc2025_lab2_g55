@@ -7,6 +7,7 @@
 	.equ GPIO_GPLEV0,    0x34
 
 	.globl main
+    .extern donut
 
 main:
 	// x0 contiene la direccion base del framebuffer
@@ -46,6 +47,11 @@ loop0:
 	// efectivamente, su valor representará si GPIO 2 está activo
 	lsr w11, w11, 1
 
+    mov x0, x20
+    bl donut
+
+    mov x0, #565
+xd:
 	//---------------------------------------------------------------
 	// Infinite Loop
 
