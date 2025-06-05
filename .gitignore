@@ -1,1 +1,5 @@
 .asm-lsp.toml
+ejercicio1/*.o
+ejercicio2/*.o
+ejercicio1/kernel8.*
+ejercicio2/kernel8.*
