@@ -18,6 +18,7 @@
 .extern put_pixel
 circle_draw:
     str x30, [sp, #-16]! // Pusheo x30 al stack
+    str x10, [sp, #-16]! // Pusheo x10 al stack
 
     mov x8, #0          // x = 0
     neg x9, x2          // y = -r
@@ -164,5 +165,6 @@ next_loop:
     b loop_circ
 
 done:
+    ldr x10, [sp], #16   // popea x10 del stack
     ldr x30, [sp], #16   // popea x30 del stack
     ret
