@@ -2,10 +2,16 @@
 .extern circle_draw
 .extern rectangle_draw
 
+.equ LIMITE, 250 //total que dura la animacion (entre que cierra los ojo y hace el segundo semicerrado)
+.equ ABIERTO, 200 
+.equ SEMICERRADO, 210
+.equ CERRADO, 240 
+
 //necesito guardar el valor de mi contador en cada frame
 .section .data
 .balign 4 //mejora el rendimiento??
 contador: .word 0
+
 
 .section .text
 draw_homero:
@@ -16,7 +22,7 @@ draw_homero:
 
     add w10, w10, #1
     
-    cmp w10, #40
+    cmp w10, LIMITE // contador
     b.lt store
     mov w10, #0
 
@@ -161,7 +167,7 @@ store:
     mov x2, #12
     mov x3, #0
     mov x4, 0x8e00
-	movk x4, 0x00ff, lsl #16
+	  movk x4, 0x00ff, lsl #16
     bl circle_draw
 
     //oreja
@@ -171,13 +177,16 @@ store:
     mov x4, 0xffff00
     bl circle_draw
 
-    cmp w10, #20
+    cmp w10, ABIERTO //contador ojos abiertos
     b.lt ojos_abiertos
 
-    cmp w10, #30
+    cmp w10, SEMICERRADO //contador  semicerrado   
     b.lt ojos_semicerrados
 
-    b ojos_cerrados
+    cmp w10, CERRADO // cerrado
+    b.lt ojos_cerrados
+
+    b ojos_semicerrados
 
 ojos_abiertos:
     //sombra ojos
