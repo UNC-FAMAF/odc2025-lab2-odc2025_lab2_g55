@@ -8,6 +8,9 @@
 
 	.globl main
     .extern donut
+    .extern circle_draw
+    .extern rectangle_draw
+    .extern put_pixel
 
 main:
 	// x0 contiene la direccion base del framebuffer

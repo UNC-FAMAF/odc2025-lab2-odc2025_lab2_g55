@@ -12,10 +12,11 @@
 .equ SCREEN_HEIGHT,     480
 .equ SCREEN_SIZE,       SCREEN_WIDTH * SCREEN_HEIGHT
 
-.extern rectangle_draw
 
 .global background
 background:
+    str x30, [sp, #-16]!         // Pusheo x30 al stack
+    mov x10, x0
     movz x1, CEIL_HIGH, lsl #16
     movk x1, CEIL_LOW
     dup v0.4s, w1
@@ -37,9 +38,13 @@ loop_pared:
     st1 { v1.4s }, [x0], #16
     subs x1, x1, #1
     bne loop_pared
+    str x0, [sp, #-16]!     // Pusheo x0 al stack
 
     // Aca tienen que dibujar todo
+    //bl calendario
+    bl ventana
 
+    ldr x0, [sp], #16       // popea x0 del stack
     movz x1, TABL_HIGH, lsl #16
     movk x1, TABL_LOW
     dup v0.4s, w1
@@ -53,4 +58,5 @@ loop_mesa:
 
     // Acá tienen que dibujar cosas que estén arriba de la mesa
 
+    ldr x30, [sp], #16           // popea x30 del stack
     ret

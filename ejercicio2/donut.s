@@ -62,6 +62,7 @@ pink_gradient:
 .balign 16
 z:  .skip D_AREA
 
+.global v_framebuffer
 .balign 16
 v_framebuffer: .skip SCREEN_SIZE * 4
 
@@ -78,10 +79,12 @@ donut:
     ldr x27, =z
 
 inf_loop:
+    str x18, [sp, #-16]!         // Pusheo x30 al stack
 
     ldr x0, =v_framebuffer
     bl background
 
+    ldr x18, [sp], #16           // popea x30 del stack
     ldr x13, =v_framebuffer
 
     mov x12, #2048          // R2 = 2048
@@ -225,9 +228,8 @@ fi_color:
 
     mov x4, SCREEN_WIDTH
     madd x0, x1, x4, x0     // x0 = y * SCREEN_WIDTH + X
-    lsl x0, x0, #2          // x0 = (y * SCREEN_WIDTH + x) * 4
 
-    str w3, [x13, x0]
+    str w3, [x13, x0, lsl #2]
 
 fi:
     // R(10, 10, ci, si)
