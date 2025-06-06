@@ -25,12 +25,12 @@ store:
 
 //CARA
     //cara (sombra)
-		mov x0, #95
+	mov x0, #95
   	mov x1, #240
     mov x2, #50
     mov x3, #0
     mov x4, 0x8e00
-		movk x4, 0x00ff, lsl #16
+	movk x4, 0x00ff, lsl #16
     bl circle_draw
 
     mov x0, #42
@@ -46,7 +46,7 @@ store:
     bl rectangle_draw
 
     // cara
-		mov x0, #60
+	mov x0, #60
     mov x2, #100
     mov x4, 0xffff00
     bl rectangle_draw
@@ -84,7 +84,7 @@ store:
     mov x4, 0x000000
     bl circle_draw
 
-		mov x0, #110
+	mov x0, #110
   	mov x1, #240
     mov x2, #50
     mov x3, #0
@@ -161,7 +161,7 @@ store:
     mov x2, #12
     mov x3, #0
     mov x4, 0x8e00
-		movk x4, 0x00ff, lsl #16
+	movk x4, 0x00ff, lsl #16
     bl circle_draw
 
     //oreja
@@ -181,48 +181,48 @@ store:
 
 ojos_abiertos:
     //sombra ojos
-      //ojo izquierdo
-	 	mov x0, #100
+    //ojo izquierdo
+	mov x0, #100
   	mov x1, #280
     mov x2, #20
     mov x3, #0
-		mov x4, 0x9494
-		movk x4, 0x0094, lsl #16
+	mov x4, 0x9494
+	movk x4, 0x0094, lsl #16
     bl circle_draw
-      //ojo derecho
+    //ojo derecho
     mov x0, #145
     bl circle_draw
     
     //relleno ojos
-      //ojo izquierdo
-		mov x0, #102
+    //ojo izquierdo
+	mov x0, #102
     mov x2, #18
-		mov x4, 0xffffff
+	mov x4, 0xffffff
     bl circle_draw
-      //ojo derecho
+    //ojo derecho
     mov x0, #147
     bl circle_draw
 
     //pupilas
-      //ojo izquierdo
-		mov x0, #110
+    //ojo izquierdo
+	mov x0, #110
     mov x1, #288
     mov x2, #3
     mov x4, 0x000000
     bl circle_draw
-      //ojo derecho
+    //ojo derecho
     mov x0, #158
     bl circle_draw
 
     //contorno ojos
-      //ojo izquierdo
-		mov x0, #100
+    //ojo izquierdo
+	mov x0, #100
     mov x1, #280
     mov x2, #21
     mov x3, #2
     bl circle_draw
-      //ojo derecho
-		mov x0, #145
+    //ojo derecho
+	mov x0, #145
     bl circle_draw
 
     b ojos_dibujados
@@ -230,48 +230,48 @@ ojos_abiertos:
 ojos_semicerrados:
 
     //sombra ojos
-      //ojo izquierdo
-	 	mov x0, #100
+    //ojo izquierdo
+	mov x0, #100
   	mov x1, #280
     mov x2, #20
     mov x3, #0
-		mov x4, 0x9494
-		movk x4, 0x0094, lsl #16
+	mov x4, 0x9494
+	movk x4, 0x0094, lsl #16
     bl circle_draw
-      //ojo derecho
+    //ojo derecho
     mov x0, #145
     bl circle_draw
     
     //relleno ojos
-      //ojo izquierdo
-		mov x0, #102
+    //ojo izquierdo
+	mov x0, #102
     mov x2, #18
-		mov x4, 0xffffff
+	mov x4, 0xffffff
     bl circle_draw
-      //ojo derecho
+    //ojo derecho
     mov x0, #147
     bl circle_draw
 
     //pupilas
-      //ojo izquierdo
-		mov x0, #107
+    //ojo izquierdo
+	mov x0, #107
     mov x1, #290	
     mov x2, #3
     mov x4, 0x000000
     bl circle_draw
-      //ojo derecho
+    //ojo derecho
     mov x0, #155
     bl circle_draw
 
     //contorno ojos
-      //ojo izquierdo
-		mov x0, #100
+    //ojo izquierdo
+	mov x0, #100
     mov x1, #280
     mov x2, #21
     mov x3, #2
     bl circle_draw
-      //ojo derecho
-		mov x0, #145
+    //ojo derecho
+	mov x0, #145
     bl circle_draw
 
     //semicerrados
@@ -306,7 +306,7 @@ ojos_semicerrados:
     mov x2, #44
     mov x3, #4
     mov x4, 0x8e00
-		movk x4, 0x00ff, lsl #16
+	movk x4, 0x00ff, lsl #16
     bl rectangle_draw
     //ojo derecho
     mov x0, #124
@@ -317,27 +317,27 @@ ojos_semicerrados:
 ojos_cerrados:
 
     //sombra
-      //ojo izquierdo
-		mov x0, #100
+    //ojo izquierdo
+	mov x0, #100
     mov x1, #280
     mov x2, #21
     mov x3, #4
     mov x4, 0x8e00
-		movk x4, 0x00ff, lsl #16
+	movk x4, 0x00ff, lsl #16
     bl circle_draw
-      //ojo derecho
-		mov x0, #145
+    //ojo derecho
+	mov x0, #145
     bl circle_draw
 
     //ojos
-      //ojo izquierdo
+    //ojo izquierdo
     mov x0, #100
   	mov x1, #275
     mov x2, #23
     mov x4, 0xffff00
     mov x3, #0
     bl circle_draw
-      //ojo derecho
+    //ojo derecho
     mov x0, #145
     bl circle_draw
 
@@ -349,7 +349,7 @@ ojos_dibujados:
     mov x2, #7
     mov x3, #0
     mov x4, 0x8e00
-		movk x4, 0x00ff, lsl #16
+	movk x4, 0x00ff, lsl #16
     bl circle_draw
 
     mov x0, #125
