@@ -1,6 +1,8 @@
 .extern rectangle_draw
 .extern circle_draw
 
+.extern draw_nube
+
 .global ventana
 ventana:
     str x30, [sp, #-16]!         // Pusheo x30 al stack
@@ -13,6 +15,9 @@ ventana:
     movk x4, 0x95ED
     bl rectangle_draw
 
+    bl draw_nube
+
+    mov x0, #370
     mov x2, #10
     movz x4, 0x2E, lsl #16
     movk x4, 0x1503

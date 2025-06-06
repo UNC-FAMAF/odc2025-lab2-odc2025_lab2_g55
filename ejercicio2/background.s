@@ -41,8 +41,8 @@ loop_pared:
 
     // Aca tienen que dibujar todo
     bl draw_homero
-    bl calendario
     bl ventana
+    bl calendario
 
     ldr x0, [sp], #16       // popea x0 del stack
     movz x1, TABL_HIGH, lsl #16
