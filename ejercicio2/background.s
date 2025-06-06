@@ -5,8 +5,8 @@
 .equ WALL_LOW,          0x69E6
 .equ CEIL_HIGH,         0xE2
 .equ CEIL_LOW,          0x27C9
-.equ TABL_HIGH,         0x6C
-.equ TABL_LOW,          0x3B2A
+.equ TABL_HIGH,         0xEB
+.equ TABL_LOW,          0xDBB2
 
 .equ SCREEN_WIDTH,      640
 .equ SCREEN_HEIGHT,     480
@@ -56,6 +56,7 @@ loop_mesa:
     subs x1, x1, #1
     bne loop_mesa
 
+    bl mantel
 
     mov x0, xzr
     mov x1, #80

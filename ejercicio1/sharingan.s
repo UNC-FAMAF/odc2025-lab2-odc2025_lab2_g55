@@ -61,7 +61,6 @@ draw_sharingan:
     mov x2, #20
     mov x3, #8
     mov x4, xzr
-    mov x5, xzr
     bl rectangle_draw
 
 	mov x0, #346

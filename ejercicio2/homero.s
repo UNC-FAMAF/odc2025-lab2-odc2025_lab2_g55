@@ -2,6 +2,12 @@
 .extern circle_draw
 .extern rectangle_draw
 
+.equ DARK_YELLOW_HIGH,  0xDC
+.equ DARK_YELLOW_LOW,   0xB300
+
+.equ YELLOW_HIGH,       0xFF
+.equ YELLOW_LOW,        0xD90F
+
 .equ LIMITE, 250 //total que dura la animacion (entre que cierra los ojo y hace el segundo semicerrado)
 .equ ABIERTO, 200 
 .equ SEMICERRADO, 210
@@ -35,8 +41,8 @@ store:
   	mov x1, #240
     mov x2, #50
     mov x3, #0
-    mov x4, 0x8e00
-	movk x4, 0x00ff, lsl #16
+    movz x4, DARK_YELLOW_HIGH, lsl #16
+    movk x4, DARK_YELLOW_LOW
     bl circle_draw
 
     mov x0, #42
@@ -54,7 +60,8 @@ store:
     // cara
 	mov x0, #60
     mov x2, #100
-    mov x4, 0xffff00
+    movz x4, YELLOW_HIGH, lsl #16
+    movk x4, YELLOW_LOW
     bl rectangle_draw
 
     mov x0, #150
@@ -94,7 +101,8 @@ store:
   	mov x1, #240
     mov x2, #50
     mov x3, #0
-    mov x4, 0xffff00
+    movz x4, YELLOW_HIGH, lsl #16
+    movk x4, YELLOW_LOW
     bl circle_draw
 
 //PELO
@@ -166,15 +174,16 @@ store:
   	mov x1, #310
     mov x2, #12
     mov x3, #0
-    mov x4, 0x8e00
-	  movk x4, 0x00ff, lsl #16
+    movz x4, DARK_YELLOW_HIGH, lsl #16
+    movk x4, DARK_YELLOW_LOW
     bl circle_draw
 
     //oreja
     mov x0, #55
     mov x2, #10
     mov x3, #0
-    mov x4, 0xffff00
+    movz x4, YELLOW_HIGH, lsl #16
+    movk x4, YELLOW_LOW
     bl circle_draw
 
     cmp w10, ABIERTO //contador ojos abiertos
@@ -290,7 +299,8 @@ ojos_semicerrados:
   	mov x1, #265
     mov x2, #20
     mov x3, #0
-    mov x4, 0xffff00
+    movz x4, YELLOW_HIGH, lsl #16
+    movk x4, YELLOW_LOW
     bl circle_draw
 
     mov x0, #79
@@ -314,8 +324,8 @@ ojos_semicerrados:
     mov x1, #285
     mov x2, #44
     mov x3, #4
-    mov x4, 0x8e00
-	movk x4, 0x00ff, lsl #16
+    movz x4, DARK_YELLOW_HIGH, lsl #16
+    movk x4, DARK_YELLOW_LOW
     bl rectangle_draw
     //ojo derecho
     mov x0, #124
@@ -331,8 +341,8 @@ ojos_cerrados:
     mov x1, #280
     mov x2, #21
     mov x3, #4
-    mov x4, 0x8e00
-	movk x4, 0x00ff, lsl #16
+    movz x4, DARK_YELLOW_HIGH, lsl #16
+    movk x4, DARK_YELLOW_LOW
     bl circle_draw
     //ojo derecho
 	mov x0, #145
@@ -343,7 +353,8 @@ ojos_cerrados:
     mov x0, #100
   	mov x1, #275
     mov x2, #23
-    mov x4, 0xffff00
+    movz x4, YELLOW_HIGH, lsl #16
+    movk x4, YELLOW_LOW
     mov x3, #0
     bl circle_draw
     //ojo derecho
@@ -357,8 +368,8 @@ ojos_dibujados:
     mov x1, #300
     mov x2, #7
     mov x3, #0
-    mov x4, 0x8e00
-	movk x4, 0x00ff, lsl #16
+    movz x4, DARK_YELLOW_HIGH, lsl #16
+    movk x4, DARK_YELLOW_LOW
     bl circle_draw
 
     mov x0, #125
@@ -372,7 +383,8 @@ ojos_dibujados:
   	mov x1, #292
     mov x2, #35
     mov x3, #13
-    mov x4, 0xffff00
+    movz x4, YELLOW_HIGH, lsl #16
+    movk x4, YELLOW_LOW
     bl rectangle_draw
 
     mov x0, #155

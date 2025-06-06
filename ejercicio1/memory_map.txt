@@ -1,0 +1,159 @@
+
+Merging program properties
+
+
+Discarded input sections
+
+ .note.gnu.property
+                0x0000000000000000        0x0 utils.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD app.o
+LOAD background_gris.o
+LOAD background.o
+LOAD circle.o
+LOAD odc2025.o
+LOAD rectangle.o
+LOAD sharingan.o
+LOAD start.o
+LOAD utils.o
+                0x0000000000080000                . = 0x80000
+
+.text           0x0000000000080000    0x90890
+ *(.text.boot)
+ .text.boot     0x0000000000080000    0x100c8 start.o
+                0x0000000000080000                _start
+ *(.text*)
+ .text          0x00000000000900c8       0x50 app.o
+                0x00000000000900c8                main
+ .text          0x0000000000090118       0xec background_gris.o
+                0x0000000000090118                background_gris
+ .text          0x0000000000090204       0x8c background.o
+                0x0000000000090204                background
+ .text          0x0000000000090290      0x140 circle.o
+                0x0000000000090290                circle_draw
+ .text          0x00000000000903d0      0x2f0 odc2025.o
+                0x00000000000903d0                draw_odc2025
+ .text          0x00000000000906c0       0x74 rectangle.o
+                0x00000000000906c0                rectangle_draw
+ .text          0x0000000000090734      0x148 sharingan.o
+                0x0000000000090734                draw_sharingan
+ .text          0x000000000009087c    0x80000 start.o
+ .text          0x000000000011087c       0x14 utils.o
+                0x000000000011087c                put_pixel
+
+.iplt           0x0000000000110890        0x0
+ .iplt          0x0000000000110890        0x0 app.o
+
+.rela.dyn       0x0000000000110890        0x0
+ .rela.iplt     0x0000000000110890        0x0 app.o
+ .rela.text.boot
+                0x0000000000110890        0x0 app.o
+
+.data           0x0000000000110890        0x0
+ .data          0x0000000000110890        0x0 app.o
+ .data          0x0000000000110890        0x0 background_gris.o
+ .data          0x0000000000110890        0x0 background.o
+ .data          0x0000000000110890        0x0 circle.o
+ .data          0x0000000000110890        0x0 odc2025.o
+ .data          0x0000000000110890        0x0 rectangle.o
+ .data          0x0000000000110890        0x0 sharingan.o
+ .data          0x0000000000110890        0x0 start.o
+ .data          0x0000000000110890        0x0 utils.o
+
+.igot.plt       0x0000000000110890        0x0
+ .igot.plt      0x0000000000110890        0x0 app.o
+
+.bss            0x0000000000110890        0x0
+ *(.bss*)
+ .bss           0x0000000000110890        0x0 app.o
+ .bss           0x0000000000110890        0x0 background_gris.o
+ .bss           0x0000000000110890        0x0 background.o
+ .bss           0x0000000000110890        0x0 circle.o
+ .bss           0x0000000000110890        0x0 odc2025.o
+ .bss           0x0000000000110890        0x0 rectangle.o
+ .bss           0x0000000000110890        0x0 sharingan.o
+ .bss           0x0000000000110890        0x0 start.o
+ .bss           0x0000000000110890        0x0 utils.o
+
+.bss            0x0000000000110890        0x0
+                0x0000000000110890                . = ALIGN (0x10)
+                0x0000000000110890                __bss_start = .
+ *(.bss .bss.*)
+ *(COMMON)
+                0x0000000000110890                __bss_end = .
+                0x0000000000110890                _end = .
+                0x0000000000000000                __bss_size = ((__bss_end - __bss_start) >> 0x3)
+OUTPUT(kernel8.elf elf64-littleaarch64)
+LOAD linker stubs
+
+.debug_line     0x0000000000000000      0x40e
+ .debug_line    0x0000000000000000       0x49 app.o
+ .debug_line    0x0000000000000049       0x7a background_gris.o
+ .debug_line    0x00000000000000c3       0x5d background.o
+ .debug_line    0x0000000000000120       0x8c circle.o
+ .debug_line    0x00000000000001ac       0xf3 odc2025.o
+ .debug_line    0x000000000000029f       0x58 rectangle.o
+ .debug_line    0x00000000000002f7       0x8d sharingan.o
+ .debug_line    0x0000000000000384       0x50 start.o
+ .debug_line    0x00000000000003d4       0x3a utils.o
+
+.debug_info     0x0000000000000000      0x19e
+ .debug_info    0x0000000000000000       0x2e app.o
+ .debug_info    0x000000000000002e       0x2e background_gris.o
+ .debug_info    0x000000000000005c       0x2e background.o
+ .debug_info    0x000000000000008a       0x2e circle.o
+ .debug_info    0x00000000000000b8       0x2e odc2025.o
+ .debug_info    0x00000000000000e6       0x2e rectangle.o
+ .debug_info    0x0000000000000114       0x2e sharingan.o
+ .debug_info    0x0000000000000142       0x2e start.o
+ .debug_info    0x0000000000000170       0x2e utils.o
+
+.debug_abbrev   0x0000000000000000       0xb4
+ .debug_abbrev  0x0000000000000000       0x14 app.o
+ .debug_abbrev  0x0000000000000014       0x14 background_gris.o
+ .debug_abbrev  0x0000000000000028       0x14 background.o
+ .debug_abbrev  0x000000000000003c       0x14 circle.o
+ .debug_abbrev  0x0000000000000050       0x14 odc2025.o
+ .debug_abbrev  0x0000000000000064       0x14 rectangle.o
+ .debug_abbrev  0x0000000000000078       0x14 sharingan.o
+ .debug_abbrev  0x000000000000008c       0x14 start.o
+ .debug_abbrev  0x00000000000000a0       0x14 utils.o
+
+.debug_aranges  0x0000000000000000      0x1b0
+ .debug_aranges
+                0x0000000000000000       0x30 app.o
+ .debug_aranges
+                0x0000000000000030       0x30 background_gris.o
+ .debug_aranges
+                0x0000000000000060       0x30 background.o
+ .debug_aranges
+                0x0000000000000090       0x30 circle.o
+ .debug_aranges
+                0x00000000000000c0       0x30 odc2025.o
+ .debug_aranges
+                0x00000000000000f0       0x30 rectangle.o
+ .debug_aranges
+                0x0000000000000120       0x30 sharingan.o
+ .debug_aranges
+                0x0000000000000150       0x30 start.o
+ .debug_aranges
+                0x0000000000000180       0x30 utils.o
+
+.debug_str      0x0000000000000000       0xa0
+ .debug_str     0x0000000000000000       0xa0 app.o
+                                         0x46 (size before relaxing)
+ .debug_str     0x00000000000000a0       0x52 background_gris.o
+ .debug_str     0x00000000000000a0       0x4d background.o
+ .debug_str     0x00000000000000a0       0x49 circle.o
+ .debug_str     0x00000000000000a0       0x4a odc2025.o
+ .debug_str     0x00000000000000a0       0x4c rectangle.o
+ .debug_str     0x00000000000000a0       0x4c sharingan.o
+ .debug_str     0x00000000000000a0       0x48 start.o
+ .debug_str     0x00000000000000a0       0x48 utils.o

@@ -1,5 +1,16 @@
 // donut(fb_adress)
 // Dibuja una dona. Recibe como argumento el address del framebuffer en x0
+// Para hacer el render de la dona nos basamos en donut.c, un programa
+// que dibuja una dona 3D utilizando caracteres ASCII en la terminal.
+// Explicación de donut.c: https://www.a1k0n.net/2011/07/20/donut-math.html
+// Follow-up de donut.c pero sin usar math.h y sin usar float:
+// https://www.a1k0n.net/2021/01/13/optimizing-donut.html
+//
+// Acá está nuestra versión que funciona en el fb del raspi3:
+// https://pastebin.com/Zz6AQXxb
+
+// Nosotros adaptamos donut.c para que funcione en el framebuffer de un
+// raspi3 y a partir de ese código en C empezamos a escribir el assembler
 // x13 = &v_framebuffer[0]
 // x18 = &framebuffer[0]
 // x19 = sA
@@ -287,8 +298,9 @@ copy_buffers:
     subs x1, x1, #1
     bne copy_buffers
 
-    //mov x0, HALT_TIME
-    //bl halt
+    mov x0, HALT_TIME
+    lsl x0, x0, #0
+    bl halt
 
 b inf_loop
 

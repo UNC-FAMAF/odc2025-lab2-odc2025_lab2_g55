@@ -1,5 +1,11 @@
 
-There are no discarded input sections
+Merging program properties
+
+
+Discarded input sections
+
+ .note.gnu.property
+                0x0000000000000000        0x0 ventana.o
 
 Memory Configuration
 
@@ -11,114 +17,157 @@ Linker script and memory map
 LOAD app.o
 LOAD background.o
 LOAD calendario.o
+LOAD circle.o
 LOAD donut.o
+LOAD homero.o
+LOAD mantel.o
+LOAD nubes.o
+LOAD odc2025.o
 LOAD rectangle.o
 LOAD start.o
 LOAD utils.o
 LOAD ventana.o
                 0x0000000000080000                . = 0x80000
 
-.text           0x0000000000080000    0x905a0
+.text           0x0000000000080000    0x91078
  *(.text.boot)
  .text.boot     0x0000000000080000    0x100c8 start.o
                 0x0000000000080000                _start
  *(.text*)
  .text          0x00000000000900c8       0x50 app.o
                 0x00000000000900c8                main
- .text          0x0000000000090118       0x88 background.o
+ .text          0x0000000000090118       0xb4 background.o
                 0x0000000000090118                background
- .text          0x00000000000901a0       0x28 calendario.o
-                0x00000000000901a0                calendario
- .text          0x00000000000901c8      0x2c0 donut.o
-                0x00000000000901c8                donut
- .text          0x0000000000090488       0x74 rectangle.o
-                0x0000000000090488                rectangle_draw
- .text          0x00000000000904fc    0x80000 start.o
- *fill*         0x00000000001104fc        0x4 
- .text          0x0000000000110500       0x38 utils.o
-                0x0000000000110500                put_pixel
-                0x000000000011051c                halt
- .text          0x0000000000110538       0x68 ventana.o
-                0x0000000000110538                ventana
+ .text          0x00000000000901cc       0xb0 calendario.o
+                0x00000000000901cc                calendario
+ .text          0x000000000009027c      0x148 circle.o
+                0x000000000009027c                circle_draw
+ *fill*         0x00000000000903c4        0x4 
+ .text          0x00000000000903c8      0x2c8 donut.o
+                0x00000000000903c8                donut
+ .text          0x0000000000090690      0x500 homero.o
+                0x0000000000090690                draw_homero
+ .text          0x0000000000090b90       0x6c mantel.o
+                0x0000000000090b90                mantel
+ *fill*         0x0000000000090bfc        0x4 
+ .text          0x0000000000090c00      0x120 nubes.o
+                0x0000000000090c00                draw_nube
+ .text          0x0000000000090d20      0x230 odc2025.o
+                0x0000000000090d20                draw_odc2025
+ .text          0x0000000000090f50       0x74 rectangle.o
+                0x0000000000090f50                rectangle_draw
+ .text          0x0000000000090fc4    0x80000 start.o
+ *fill*         0x0000000000110fc4        0x4 
+ .text          0x0000000000110fc8       0x40 utils.o
+                0x0000000000110fc8                put_pixel
+                0x0000000000110fec                halt
+ .text          0x0000000000111008       0x70 ventana.o
+                0x0000000000111008                ventana
 
-.rodata         0x00000000001105a0       0x70
- .rodata        0x00000000001105a0       0x70 donut.o
+.rodata         0x0000000000111080       0x70
+ .rodata        0x0000000000111080       0x70 donut.o
 
-.iplt           0x0000000000110610        0x0
- .iplt          0x0000000000110610        0x0 app.o
+.iplt           0x00000000001110f0        0x0
+ .iplt          0x00000000001110f0        0x0 app.o
 
-.rela.dyn       0x0000000000110610        0x0
- .rela.iplt     0x0000000000110610        0x0 app.o
+.rela.dyn       0x00000000001110f0        0x0
+ .rela.iplt     0x00000000001110f0        0x0 app.o
  .rela.text.boot
-                0x0000000000110610        0x0 app.o
+                0x00000000001110f0        0x0 app.o
 
-.data           0x0000000000110610        0x0
- .data          0x0000000000110610        0x0 app.o
- .data          0x0000000000110610        0x0 background.o
- .data          0x0000000000110610        0x0 calendario.o
- .data          0x0000000000110610        0x0 donut.o
- .data          0x0000000000110610        0x0 rectangle.o
- .data          0x0000000000110610        0x0 start.o
- .data          0x0000000000110610        0x0 utils.o
- .data          0x0000000000110610        0x0 ventana.o
+.data           0x00000000001110f0       0x1c
+ .data          0x00000000001110f0        0x0 app.o
+ .data          0x00000000001110f0        0x0 background.o
+ .data          0x00000000001110f0        0x0 calendario.o
+ .data          0x00000000001110f0        0x0 circle.o
+ .data          0x00000000001110f0        0x0 donut.o
+ .data          0x00000000001110f0        0x4 homero.o
+ .data          0x00000000001110f4        0x0 mantel.o
+ *fill*         0x00000000001110f4        0xc 
+ .data          0x0000000000111100        0xc nubes.o
+ .data          0x000000000011110c        0x0 odc2025.o
+ .data          0x000000000011110c        0x0 rectangle.o
+ .data          0x000000000011110c        0x0 start.o
+ .data          0x000000000011110c        0x0 utils.o
+ .data          0x000000000011110c        0x0 ventana.o
 
-.igot.plt       0x0000000000110610        0x0
- .igot.plt      0x0000000000110610        0x0 app.o
+.igot.plt       0x0000000000111110        0x0
+ .igot.plt      0x0000000000111110        0x0 app.o
 
-.bss            0x0000000000110610   0x130000
+.bss            0x0000000000111110   0x130000
  *(.bss*)
- .bss           0x0000000000110610        0x0 app.o
- .bss           0x0000000000110610        0x0 background.o
- .bss           0x0000000000110610        0x0 calendario.o
- .bss           0x0000000000110610   0x130000 donut.o
-                0x0000000000114610                v_framebuffer
- .bss           0x0000000000240610        0x0 rectangle.o
- .bss           0x0000000000240610        0x0 start.o
- .bss           0x0000000000240610        0x0 utils.o
- .bss           0x0000000000240610        0x0 ventana.o
+ .bss           0x0000000000111110        0x0 app.o
+ .bss           0x0000000000111110        0x0 background.o
+ .bss           0x0000000000111110        0x0 calendario.o
+ .bss           0x0000000000111110        0x0 circle.o
+ .bss           0x0000000000111110   0x130000 donut.o
+                0x0000000000115110                v_framebuffer
+ .bss           0x0000000000241110        0x0 homero.o
+ .bss           0x0000000000241110        0x0 mantel.o
+ .bss           0x0000000000241110        0x0 nubes.o
+ .bss           0x0000000000241110        0x0 odc2025.o
+ .bss           0x0000000000241110        0x0 rectangle.o
+ .bss           0x0000000000241110        0x0 start.o
+ .bss           0x0000000000241110        0x0 utils.o
+ .bss           0x0000000000241110        0x0 ventana.o
 
-.bss            0x0000000000240610        0x0
-                0x0000000000240610                . = ALIGN (0x10)
-                0x0000000000240610                __bss_start = .
+.bss            0x0000000000241110        0x0
+                0x0000000000241110                . = ALIGN (0x10)
+                0x0000000000241110                __bss_start = .
  *(.bss .bss.*)
  *(COMMON)
-                0x0000000000240610                __bss_end = .
-                0x0000000000240610                _end = .
+                0x0000000000241110                __bss_end = .
+                0x0000000000241110                _end = .
                 0x0000000000000000                __bss_size = ((__bss_end - __bss_start) >> 0x3)
 OUTPUT(kernel8.elf elf64-littleaarch64)
 LOAD linker stubs
 
-.debug_line     0x0000000000000000      0x305
+.debug_line     0x0000000000000000      0x6ca
  .debug_line    0x0000000000000000       0x49 app.o
- .debug_line    0x0000000000000049       0x5e background.o
- .debug_line    0x00000000000000a7       0x44 calendario.o
- .debug_line    0x00000000000000eb       0xe1 donut.o
- .debug_line    0x00000000000001cc       0x58 rectangle.o
- .debug_line    0x0000000000000224       0x50 start.o
- .debug_line    0x0000000000000274       0x40 utils.o
- .debug_line    0x00000000000002b4       0x51 ventana.o
+ .debug_line    0x0000000000000049       0x69 background.o
+ .debug_line    0x00000000000000b2       0x66 calendario.o
+ .debug_line    0x0000000000000118       0x8e circle.o
+ .debug_line    0x00000000000001a6       0xe4 donut.o
+ .debug_line    0x000000000000028a      0x176 homero.o
+ .debug_line    0x0000000000000400       0x51 mantel.o
+ .debug_line    0x0000000000000451       0x79 nubes.o
+ .debug_line    0x00000000000004ca       0xc3 odc2025.o
+ .debug_line    0x000000000000058d       0x58 rectangle.o
+ .debug_line    0x00000000000005e5       0x50 start.o
+ .debug_line    0x0000000000000635       0x42 utils.o
+ .debug_line    0x0000000000000677       0x53 ventana.o
 
-.debug_info     0x0000000000000000      0x170
+.debug_info     0x0000000000000000      0x256
  .debug_info    0x0000000000000000       0x2e app.o
  .debug_info    0x000000000000002e       0x2e background.o
  .debug_info    0x000000000000005c       0x2e calendario.o
- .debug_info    0x000000000000008a       0x2e donut.o
- .debug_info    0x00000000000000b8       0x2e rectangle.o
- .debug_info    0x00000000000000e6       0x2e start.o
- .debug_info    0x0000000000000114       0x2e utils.o
- .debug_info    0x0000000000000142       0x2e ventana.o
+ .debug_info    0x000000000000008a       0x2e circle.o
+ .debug_info    0x00000000000000b8       0x2e donut.o
+ .debug_info    0x00000000000000e6       0x2e homero.o
+ .debug_info    0x0000000000000114       0x2e mantel.o
+ .debug_info    0x0000000000000142       0x2e nubes.o
+ .debug_info    0x0000000000000170       0x2e odc2025.o
+ .debug_info    0x000000000000019e       0x2e rectangle.o
+ .debug_info    0x00000000000001cc       0x2e start.o
+ .debug_info    0x00000000000001fa       0x2e utils.o
+ .debug_info    0x0000000000000228       0x2e ventana.o
 
-.debug_abbrev   0x0000000000000000       0xa0
+.debug_abbrev   0x0000000000000000      0x104
  .debug_abbrev  0x0000000000000000       0x14 app.o
  .debug_abbrev  0x0000000000000014       0x14 background.o
  .debug_abbrev  0x0000000000000028       0x14 calendario.o
- .debug_abbrev  0x000000000000003c       0x14 donut.o
- .debug_abbrev  0x0000000000000050       0x14 rectangle.o
- .debug_abbrev  0x0000000000000064       0x14 start.o
- .debug_abbrev  0x0000000000000078       0x14 utils.o
- .debug_abbrev  0x000000000000008c       0x14 ventana.o
+ .debug_abbrev  0x000000000000003c       0x14 circle.o
+ .debug_abbrev  0x0000000000000050       0x14 donut.o
+ .debug_abbrev  0x0000000000000064       0x14 homero.o
+ .debug_abbrev  0x0000000000000078       0x14 mantel.o
+ .debug_abbrev  0x000000000000008c       0x14 nubes.o
+ .debug_abbrev  0x00000000000000a0       0x14 odc2025.o
+ .debug_abbrev  0x00000000000000b4       0x14 rectangle.o
+ .debug_abbrev  0x00000000000000c8       0x14 start.o
+ .debug_abbrev  0x00000000000000dc       0x14 utils.o
+ .debug_abbrev  0x00000000000000f0       0x14 ventana.o
 
-.debug_aranges  0x0000000000000000      0x180
+.debug_aranges  0x0000000000000000      0x270
  .debug_aranges
                 0x0000000000000000       0x30 app.o
  .debug_aranges
@@ -126,23 +175,38 @@ LOAD linker stubs
  .debug_aranges
                 0x0000000000000060       0x30 calendario.o
  .debug_aranges
-                0x0000000000000090       0x30 donut.o
+                0x0000000000000090       0x30 circle.o
  .debug_aranges
-                0x00000000000000c0       0x30 rectangle.o
+                0x00000000000000c0       0x30 donut.o
  .debug_aranges
-                0x00000000000000f0       0x30 start.o
+                0x00000000000000f0       0x30 homero.o
  .debug_aranges
-                0x0000000000000120       0x30 utils.o
+                0x0000000000000120       0x30 mantel.o
  .debug_aranges
-                0x0000000000000150       0x30 ventana.o
+                0x0000000000000150       0x30 nubes.o
+ .debug_aranges
+                0x0000000000000180       0x30 odc2025.o
+ .debug_aranges
+                0x00000000000001b0       0x30 rectangle.o
+ .debug_aranges
+                0x00000000000001e0       0x30 start.o
+ .debug_aranges
+                0x0000000000000210       0x30 utils.o
+ .debug_aranges
+                0x0000000000000240       0x30 ventana.o
 
-.debug_str      0x0000000000000000       0x83
- .debug_str     0x0000000000000000       0x83 app.o
-                                         0x3b (size before relaxing)
- .debug_str     0x0000000000000083       0x42 background.o
- .debug_str     0x0000000000000083       0x42 calendario.o
- .debug_str     0x0000000000000083       0x3d donut.o
- .debug_str     0x0000000000000083       0x41 rectangle.o
- .debug_str     0x0000000000000083       0x3d start.o
- .debug_str     0x0000000000000083       0x3d utils.o
- .debug_str     0x0000000000000083       0x3f ventana.o
+.debug_str      0x0000000000000000       0xbb
+ .debug_str     0x0000000000000000       0xbb app.o
+                                         0x46 (size before relaxing)
+ .debug_str     0x00000000000000bb       0x4d background.o
+ .debug_str     0x00000000000000bb       0x4d calendario.o
+ .debug_str     0x00000000000000bb       0x49 circle.o
+ .debug_str     0x00000000000000bb       0x48 donut.o
+ .debug_str     0x00000000000000bb       0x49 homero.o
+ .debug_str     0x00000000000000bb       0x49 mantel.o
+ .debug_str     0x00000000000000bb       0x48 nubes.o
+ .debug_str     0x00000000000000bb       0x4a odc2025.o
+ .debug_str     0x00000000000000bb       0x4c rectangle.o
+ .debug_str     0x00000000000000bb       0x48 start.o
+ .debug_str     0x00000000000000bb       0x48 utils.o
+ .debug_str     0x00000000000000bb       0x4a ventana.o
