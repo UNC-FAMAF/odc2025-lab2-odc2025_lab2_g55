@@ -8,10 +8,12 @@
 
 	.globl main
 
-    .extern draw_sharingan
-    .extern circle_draw
+    	.extern draw_sharingan
+    	.extern circle_draw
 	.extern rectangle_draw
 	.extern draw_odc2025
+ 	.extern background
+    	.extern background_gris
 main:
 	// x0 contiene la direccion base del framebuffer
  	mov x20, x0	// Guarda la dirección base del framebuffer en x20
@@ -50,6 +52,7 @@ loop0:
 	// efectivamente, su valor representará si GPIO 2 está activo
 	lsr w11, w11, 1
 
+    bl background
     bl draw_sharingan
     bl draw_odc2025
 
