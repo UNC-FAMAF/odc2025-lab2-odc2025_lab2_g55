@@ -49,7 +49,7 @@ indexadas por addr a Dt1 y Dt2.
 
 ldp o "Load Pair" se usa en homero.s para poppear los registros x30 y x19 pusheados con stp.
 
-Instrucciones SIMD
+Instrucciones SIMD:
 Donut.s usa una técnica de double-buffering, muy utilizada en render de videojugos.
 Lo que se hace en el double-buffering es dibujar el siguiente frame en un buffer
 distinto al framebuffer actual e intercambiar los buffers, llamemolos v-buffer (virtual
